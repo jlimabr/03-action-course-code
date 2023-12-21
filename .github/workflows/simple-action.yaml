@@ -10,7 +10,7 @@ jobs:
         uses: ./.github/actions/slack-php
         with:
           slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
-          message: Hello Slack
+          message: Hello Slack - New deployment
       - name: Send a Slack Message
         uses: ./.github/actions/slack-joke
         with:
@@ -18,7 +18,7 @@ jobs:
           upload_joke: true
           slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
       - name: Displaying joke output
-        run: echo '${{ steps.slack-joke.output.joke }}'
+        run: echo '${{ steps.slack-joke.outputs.joke }}'
       - name: Simple JS Action
         id: greet
         uses: ./.github/actions/hello
