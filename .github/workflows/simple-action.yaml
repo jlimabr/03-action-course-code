@@ -13,15 +13,16 @@ jobs:
           message: Hello Slack - New deployment
       - name: Send a Slack Message
         uses: ./.github/actions/slack-joke
+        id: slack-joke
         with:
           slack_username: jlimabr
           upload_joke: true
           slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
       - name: Displaying joke output
         run: echo '${{ steps.slack-joke.outputs.joke }}'
-      - name: Simple JS Action
-        id: greet
-        uses: ./.github/actions/hello
-        with:
-          who_to_greet: Ali
+      # - name: Simple JS Action
+      #   id: greet
+      #   uses: ./.github/actions/hello
+      #   with:
+      #     who_to_greet: Ali
 
