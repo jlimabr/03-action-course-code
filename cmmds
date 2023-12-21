@@ -1,3 +1,7 @@
 gh workflow view "First Workflow"
 gh workflow list
 gh workflow enable "First Workflow"
+gh workflow run manually-triggered -f string="from gh cli" -f environment=production --ref main 
+
+chmod +x script.sh
+git add --chmod=+x script.sh
