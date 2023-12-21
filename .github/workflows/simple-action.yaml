@@ -11,3 +11,17 @@ jobs:
         with:
           slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
           message: Hello Slack
+      - name: Send a Slack Message
+        uses: ./.github/actions/slack-joke
+        with:
+          slack_username: jlimabr
+          upload_joke: true
+          slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
+      - name: Displaying joke output
+        run: echo '${{ steps.slack-joke.output.joke }}'
+      - name: Simple JS Action
+        id: greet
+        uses: ./.github/actions/hello
+        with:
+          who_to_greet: Ali
+
