@@ -1,0 +1,11 @@
+npm i
+npm run build
+npm run start // http://localhost:3000
+npm run lint
+npm run typecheck
+npm run format
+npm run format:fix
+npm run test
+npm start
+npx playwright install --with-deps 
+npm run test:e2e
