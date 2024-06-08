@@ -1,3 +1,18 @@
+npm run
+
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc",
+    "format": "prettier . --check",
+    "format:fix": "prettier . --write",
+    "test": "jest --coverage",
+    "test:e2e": "playwright test",
+    "prepare": "husky install"
+
 npm run build
 npm run dev
 npm run test
+npx playwright install --with-deps
+npm run test:e2e
