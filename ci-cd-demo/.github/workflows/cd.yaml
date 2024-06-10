@@ -18,6 +18,13 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+          # fetch-depth: will ensure the changesets action is not going to try to 
+          #              create a tag that already exists if changes with not changeset 
+          #              files were pushed.
+          # persist-credentials: will ensure that new updates to an already opened Version PR 
+          #                      are going to be pushed using our custom personal access token 
+          #                      and not the GITHUB_TOKEN. 
+          #                      This ensures new updates to a version pr are going to trigger the CI workflow.
       - name: Setup Node Environment
         uses: actions/setup-node@v3
         with:
