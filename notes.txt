@@ -1,0 +1,65 @@
+Quick Note
+While testing destroying an environment when a pull request is closed, I realized our workflow is not going to have access to our AWS role with the current trust policy. So for that we need to allow the pull request event in the destroy-pr-env workflow by adding this item to our array in the AWS trust policy:
+
+"repo:github-actions-course/ci-cd-demo:pull_request:job_workflow_ref:github-actions-course/ci-cd-demo/.github/workflows/destroy-pr-env.yaml@refs/heads/main"
+
+So our whole condition will look like so:
+
+ "Condition": {
+    "StringEquals": {
+        "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
+    },
+    "StringLike": {
+        "token.actions.githubusercontent.com:sub": [
+            "repo:github-actions-course/ci-cd-demo:environment:staging:job_workflow_ref:github-actions-course/ci-cd-demo/.github/workflows/deploy.yaml@*",
+            "repo:github-actions-course/ci-cd-demo:environment:production:job_workflow_ref:github-actions-course/ci-cd-demo/.github/workflows/deploy.yaml@*",
+            "repo:github-actions-course/ci-cd-demo:ref:refs/heads/main:job_workflow_ref:github-actions-course/ci-cd-demo/.github/workflows/destroy-pr-env.yaml@refs/heads/main",
+            "repo:github-actions-course/ci-cd-demo:pull_request:job_workflow_ref:github-actions-course/ci-cd-demo/.github/workflows/destroy-pr-env.yaml@refs/heads/main"
+        ]
+    }
+}
+
+
+
+
+More Reading
+Thanks for watching the course. I hope you were able to get the most out of it. Here are some links for more topics that you might be interested in reading about:
+
+Security considerations when using GitHub Actions: 
+https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions
+I recommend going through this one.
+
+Hosting your own runner machines.
+https://docs.github.com/en/actions/hosting-your-own-runners
+
+Larger runners for organizations.
+https://docs.github.com/en/actions/using-github-hosted-runners/about-larger-runners
+
+Migrating to Github Actions from other CI services
+https://docs.github.com/en/actions/migrating-to-github-actions
+
+More Examples:
+
+Publishing Node.js packages
+https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+Publishing Java packages with Maven
+https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-maven
+
+Publishing Java packages with Gradle
+https://docs.github.com/en/actions/publishing-packages/publishing-java-packages-with-gradle
+
+Creating PostgreSQL service containers
+https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers
+
+Creating Redis service containers
+https://docs.github.com/en/actions/using-containerized-services/creating-redis-service-containers
+
+Deploying XCode applications
+https://docs.github.com/en/actions/deployment/deploying-xcode-applications/installing-an-apple-certificate-on-macos-runners-for-xcode-development
+
+More OIDC examples with different cloud providers
+https://docs.github.com/en/actions/deployment/security-hardening-your-deployments
+
+More CI examples with different environments
+https://docs.github.com/en/actions/automating-builds-and-tests
